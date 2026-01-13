@@ -68,3 +68,13 @@ Content-Type: application/json
   "products": [10, 15, 22]
 }
 
+
+###add to cart
+POST http://localhost:3000/order-item/add
+Content-Type: application/json
+
+{
+  "productId":2,
+  "quantity":5,
+  "cart": 1
+}

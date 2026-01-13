@@ -11,9 +11,5 @@ export class AddToCartDto {
   quantity: number;
 
   @IsNumber()
-  @IsPositive()
-  totalAmount: number;
-
-  @IsNumber()
   cart: number;
 }

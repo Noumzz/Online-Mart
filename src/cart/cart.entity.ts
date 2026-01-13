@@ -18,6 +18,6 @@ export class Cart {
   @JoinColumn()
   user: User;
 
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.id)
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.cart)
   orderItems: OrderItem[];
 }

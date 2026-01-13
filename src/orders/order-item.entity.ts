@@ -3,7 +3,9 @@ import { Product } from 'src/products/product.entity';
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -13,7 +15,8 @@ export class OrderItem {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => Product)
+  @ManyToOne(() => Product)
+  @JoinColumn()
   product: Product;
 
   @Column()
@@ -23,5 +26,6 @@ export class OrderItem {
   totalAmount: number;
 
   @ManyToOne(() => Cart, (cart) => cart.orderItems)
+  @JoinColumn()
   cart: Cart;
 }

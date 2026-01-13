@@ -28,7 +28,6 @@ export class StoreService {
     const products = await this.productRepo.findBy({ id: store.id });
     store.products = products;
     store.storeAddress = createStoreDto.storeAddress;
-    const createdStore = this.storeRepo.create(store);
-    return await this.storeRepo.save(createdStore);
+    return await this.storeRepo.save(store);
   }
 }

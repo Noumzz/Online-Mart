@@ -13,6 +13,8 @@ import { MartOwnerService } from './store-owner/store-owner.service';
 import { UsersController } from './users/users.controller';
 import { ProductsModule } from './products/products.module';
 import { StoreModule } from './store/store.module';
+import { OrderItemModule } from './orders/order.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { StoreModule } from './store/store.module';
     MartOwnerModule,
     ProductsModule,
     StoreModule,
+    OrderItemModule,
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService],
