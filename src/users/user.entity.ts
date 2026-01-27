@@ -1,6 +1,13 @@
 import { Exclude } from 'class-transformer';
 import { Cart } from 'src/cart/cart.entity';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Order } from 'src/orders/order.entity';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('user')
 export class User {
@@ -26,6 +33,12 @@ export class User {
   @Column()
   address: string;
 
+  @Column({ type: 'text', nullable: true })
+  hashedRefreshToken: string | null;
+
   @OneToOne(() => Cart)
   cart: Cart;
+
+  @OneToMany(() => Order, (order) => order.customerId)
+  orders: Order[];
 }

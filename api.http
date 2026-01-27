@@ -75,6 +75,15 @@ Content-Type: application/json
 
 {
   "productId":2,
-  "quantity":5,
-  "cart": 1
+  "quantity":4,
+  "cart": 2
 }
+
+### Get Cart
+GET http://localhost:3000/cart/2
+
+### checkout
+POST http://localhost:3000/cart/checkout/2
+Content-Type: application/json
+
+  {}

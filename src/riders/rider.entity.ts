@@ -30,4 +30,7 @@ export class Rider {
 
   @Column()
   linsence: string;
+
+  @Column({ type: 'text', nullable: true, default: null })
+  refreshToken: string | null;
 }

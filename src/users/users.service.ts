@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
@@ -23,6 +23,26 @@ export class UsersService {
     user.password = hashedPassword;
     user.phone = createUserDto.phoneNumber;
     user.address = createUserDto.address;
+    return await this.userRepo.save(user);
+  }
+
+  async findOne(userId: number): Promise<User> {
+    const user = await this.userRepo.findOne({
+      where: {
+        id: userId,
+      },
+    });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+
+  async updateRefreshToken(userId: number, refreshToken: string) {
+    const user = await this.findOne(userId);
+    const saltRounds = await bcrypt.genSalt(10);
+    const hashedRefreshToken = await bcrypt.hash(refreshToken, saltRounds);
+    user.hashedRefreshToken = hashedRefreshToken;
     return await this.userRepo.save(user);
   }
 }

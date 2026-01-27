@@ -15,9 +15,14 @@ import { ProductsModule } from './products/products.module';
 import { StoreModule } from './store/store.module';
 import { OrderItemModule } from './orders/order.module';
 import { CartModule } from './cart/cart.module';
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot(dataSourceOptions),
     UsersModule,
     RidersModule,
@@ -26,6 +31,7 @@ import { CartModule } from './cart/cart.module';
     StoreModule,
     OrderItemModule,
     CartModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

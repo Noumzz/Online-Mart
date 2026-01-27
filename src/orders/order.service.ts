@@ -9,8 +9,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Cart } from 'src/cart/cart.entity';
-import { Order } from './order.entity';
-
 @Injectable()
 export class OrderItemService {
   constructor(
@@ -60,8 +58,6 @@ export class OrderItemService {
       orderItem.totalAmount = orderItem.quantity * orderItem.product.price;
     }
     const savedOrderItem = await this.orderItemRepo.save(orderItem);
-
-    product.quantity = product.quantity - addToCart.quantity;
-    await this.productRepo.save(product);
+    return savedOrderItem;
   }
 }
