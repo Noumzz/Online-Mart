@@ -76,14 +76,14 @@ Content-Type: application/json
 {
   "productId":2,
   "quantity":4,
-  "cart": 2
+  "cart": 4
 }
 
 ### Get Cart
-GET http://localhost:3000/cart/2
+GET http://localhost:3000/cart/4
 
 ### checkout
-POST http://localhost:3000/cart/checkout/2
+POST http://localhost:3000/cart/checkout/4
 Content-Type: application/json
 
   {}

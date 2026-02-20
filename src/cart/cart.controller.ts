@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CartService } from './cart.service';
+import { CheckoutDto } from './dto/checkout.dto';
 
 @Controller('cart')
 export class CartController {
@@ -11,7 +12,7 @@ export class CartController {
   }
 
   @Post('checkout/:id')
-  checkOut(@Param('id') id: number) {
-    return this.cartService.checkOut(id);
+  checkOut(@Param('id') id: number, @Body() dto: CheckoutDto) {
+    return this.cartService.checkOut(id, dto.confirmPrice);
   }
 }

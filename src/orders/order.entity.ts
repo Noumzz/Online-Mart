@@ -7,9 +7,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Rider } from 'src/riders/rider.entity';
+import { OrderStatus } from 'src/types/enums/order-status.enum';
 import { OrderItem } from './order-item.entity';
 
-@Entity('Order')
+@Entity('order')
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
@@ -18,9 +20,26 @@ export class Order {
   @JoinColumn()
   customerId: User;
 
-  @OneToMany(() => OrderItem, (orderitem) => orderitem.order)
+  @Column({ default: null })
+  userId: number;
+
+  @OneToMany(() => OrderItem, (orderitem) => orderitem.order, { cascade: true })
   orderItems: OrderItem[];
 
   @Column()
   totalAmount: number;
+
+  @Column({
+    type: 'enum',
+    enum: OrderStatus,
+    default: OrderStatus.PENDING,
+  })
+  orderStatus: OrderStatus;
+
+  @ManyToOne(() => Rider, (rider) => rider.orders, { nullable: true })
+  @JoinColumn()
+  rider: Rider | null;
+
+  @Column({ nullable: true })
+  riderId: number;
 }

@@ -21,8 +21,6 @@ export class MartOwnerService {
       genSalt,
     );
     martOwner.password = hashedPassword;
-    martOwner.shops = createMartOwnerDto.shops;
-    martOwner.products = createMartOwnerDto.products;
     martOwner.contactNumber = createMartOwnerDto.contactNumber;
     return await this.martOwnerRepo.save(martOwner);
   }

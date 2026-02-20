@@ -21,12 +21,6 @@ export class StoreOwner {
   @Column()
   contactNumber: string;
 
-  @Column('text', { array: true, nullable: true })
-  shops: string[];
-
-  @Column('text', { array: true, nullable: true })
-  products: string[];
-
   @ManyToMany(() => Store, (store) => store.owners)
   stores: Store[];
 }

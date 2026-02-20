@@ -1,4 +1,4 @@
-import { OrderItem } from 'src/orders/order-item.entity';
+import { CartItem } from 'src/orders/cart-item.entity';
 import { User } from 'src/users/user.entity';
 import {
   Column,
@@ -18,6 +18,6 @@ export class Cart {
   @JoinColumn()
   user: User;
 
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.cart)
-  orderItems: OrderItem[];
+  @OneToMany(() => CartItem, (cartItem) => cartItem.cart)
+  cartItems: CartItem[];
 }

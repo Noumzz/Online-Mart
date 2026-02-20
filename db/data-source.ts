@@ -9,9 +9,10 @@ export const dataSourceOptions: DataSourceOptions = {
   password: '1122',
   database: 'Mart',
   entities: [join(process.cwd(), 'dist/**/*.entity.js')],
-  migrations: [join(process.cwd(), 'dist/db/migrations/*.js')],
-  migrationsTableName: 'Migrations',
-  synchronize: false,
+  migrations: [],
+  //migrations: [join(process.cwd(), 'dist/db/migrations/*.js')],
+  //migrationsTableName: 'Migrations',
+  synchronize: true,
 };
 
 const dataSource = new DataSource(dataSourceOptions);

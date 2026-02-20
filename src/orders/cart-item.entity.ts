@@ -1,3 +1,4 @@
+import { Cart } from 'src/cart/cart.entity';
 import { Product } from 'src/products/product.entity';
 import {
   Column,
@@ -6,10 +7,9 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Order } from './order.entity';
 
-@Entity('orderItem')
-export class OrderItem {
+@Entity('cartItem')
+export class CartItem {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -21,10 +21,15 @@ export class OrderItem {
   quantity: number;
 
   @Column()
+  priceAtAddTime: number;
+
+  @Column()
   totalAmount: number;
 
-  @ManyToOne(() => Order, (order) => order.orderItems, {
+  @ManyToOne(() => Cart, (cart) => cart.cartItems, {
+    nullable: true,
     onDelete: 'CASCADE',
   })
-  order: Order;
+  @JoinColumn()
+  cart: Cart | null;
 }
