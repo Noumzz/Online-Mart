@@ -84,7 +84,7 @@ export class RiderAuthService {
   }
 
   async validateRider(id: number) {
-    const rider = this.riderService.findOne(id);
+    const rider = await this.riderService.findOne(id);
     if (!rider) {
       throw new NotFoundException('Rider not found');
     }

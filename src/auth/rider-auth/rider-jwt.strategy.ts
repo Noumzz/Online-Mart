@@ -21,10 +21,11 @@ export class RidersJwtStrategy extends PassportStrategy(
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: jwtRider.secret as string,
+      passReqToCallback: true,
     });
   }
 
-  validate(req: Request, payload: RiderJwtPayload) {
+  async validate(req: Request, payload: RiderJwtPayload) {
     const riderId = payload.sub;
     return this.riderAuthService.validateRider(riderId);
   }

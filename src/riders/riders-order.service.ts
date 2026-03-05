@@ -8,7 +8,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Order } from 'src/orders/order.entity';
 import { OrderStatus } from 'src/types/enums/order-status.enum';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, IsNull, Repository } from 'typeorm';
 import { Rider } from './rider.entity';
 import { RidersService } from './riders.service';
 
@@ -27,8 +27,9 @@ export class RidersOrderService {
     const orders = await this.orderRepo.find({
       where: {
         orderStatus: OrderStatus.PENDING,
+        rider: IsNull(),
       },
-      relations: ['rider'],
+      //relations: ['rider'],
     });
     return orders;
   }
@@ -73,15 +74,24 @@ export class RidersOrderService {
           'orderItems.product',
         ],
       });
+      if (!fullOrder) {
+        throw new NotFoundException('Order Not Found');
+      }
 
       return {
-        OrderItems: fullOrder?.orderItems,
-        OrderTotalAmount: fullOrder?.totalAmount,
+        id: fullOrder.id,
+        totalAmount: fullOrder.totalAmount,
+        orderStatus: fullOrder.orderStatus,
+        items: fullOrder.orderItems.map((item) => ({
+          productName: item.product.productName,
+          price: item.product.price,
+          quantity: item.quantity,
+        })),
       };
     });
   }
 
-  async pickOrder(riderId: number, orderId: number) {
+  async pickOrder(orderId: number, riderId: number) {
     const order = await this.orderRepo.findOne({
       where: {
         id: orderId,
@@ -111,7 +121,7 @@ export class RidersOrderService {
       orderStatus: assigned.orderStatus,
     };
   }
-  async cancelOrder(riderId: number, orderId: number) {
+  async cancelOrder(orderId: number, riderId: number) {
     const order = await this.orderService.findOrderById(orderId);
 
     if (
@@ -128,7 +138,7 @@ export class RidersOrderService {
     };
   }
 
-  async deliverOrder(riderId: number, orderId: number) {
+  async deliverOrder(orderId: number, riderId: number) {
     const order = await this.orderService.findOrderById(orderId);
     if (order.riderId != riderId || order.orderStatus !== OrderStatus.PICKED) {
       throw new UnauthorizedException('Not Authorized');
