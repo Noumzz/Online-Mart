@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Store } from './store.entity';
 import { Repository } from 'typeorm';
@@ -29,5 +29,19 @@ export class StoreService {
     store.products = products;
     store.storeAddress = createStoreDto.storeAddress;
     return await this.storeRepo.save(store);
+  }
+
+  async getAllProduct(storeId: number) {
+    const store = await this.storeRepo.findOne({
+      where: {
+        id: storeId,
+      },
+      relations: ['products'],
+    });
+    if (!store) {
+      throw new NotFoundException();
+    }
+
+    return store.products;
   }
 }

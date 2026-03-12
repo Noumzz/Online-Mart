@@ -8,7 +8,6 @@ import {
 import { RidersService } from 'src/riders/riders.service';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
-import { AuthJwtPayload } from '../types/auth-jwtPayload';
 import type { ConfigType } from '@nestjs/config';
 import { riderRefreshJwt } from '../config/rider-refresh-jwt.config';
 import { CurrentRider } from '../types/rider';

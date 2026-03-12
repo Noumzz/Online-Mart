@@ -4,7 +4,6 @@ import type { ConfigType } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { RiderJwtPayload } from '../types/rider-jwtPayload';
-import { RidersService } from 'src/riders/riders.service';
 import { RiderAuthService } from './rider-auth.service';
 import { Request } from 'express';
 
@@ -15,7 +14,7 @@ export class RidersJwtStrategy extends PassportStrategy(
 ) {
   constructor(
     @Inject(riderJwt.KEY)
-    private jwtRider: ConfigType<typeof riderJwt>,
+    jwtRider: ConfigType<typeof riderJwt>,
     private riderAuthService: RiderAuthService,
   ) {
     super({

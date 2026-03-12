@@ -1,14 +1,6 @@
-import {
-  IsArray,
-  IsEmail,
-  IsNotEmpty,
-  IsNumber,
-  IsPhoneNumber,
-  isString,
-  IsString,
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
 
-export class CreateMartOwnerDto {
+export class OwnerSignupDto {
   @IsString()
   @IsNotEmpty()
   firstName: string;
@@ -21,20 +13,10 @@ export class CreateMartOwnerDto {
   @IsNotEmpty()
   email: string;
 
-  @IsEmail()
+  @IsString()
   @IsNotEmpty()
   password: string;
 
   @IsPhoneNumber()
   contactNumber: string;
-
-  @IsArray()
-  @IsNotEmpty()
-  @IsString()
-  shops: string[];
-
-  @IsArray()
-  @IsNotEmpty()
-  @IsString()
-  products: string[];
 }

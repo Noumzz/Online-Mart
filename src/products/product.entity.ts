@@ -7,9 +7,11 @@ import {
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 
 @Entity('product')
+//@Unique(['productName', 'store'])
 export class Product {
   @PrimaryGeneratedColumn()
   id: number;

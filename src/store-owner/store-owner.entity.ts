@@ -21,6 +21,9 @@ export class StoreOwner {
   @Column()
   contactNumber: string;
 
+  @Column({ type: 'text', nullable: true, default: null })
+  refreshToken: string;
+
   @ManyToMany(() => Store, (store) => store.owners)
   stores: Store[];
 }

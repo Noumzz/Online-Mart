@@ -14,7 +14,7 @@ export class RiderRefreshStrategy extends PassportStrategy(
 ) {
   constructor(
     @Inject(riderRefreshJwt.KEY)
-    private refreshRiderJwt: ConfigType<typeof riderRefreshJwt>,
+    refreshRiderJwt: ConfigType<typeof riderRefreshJwt>,
     private riderAuthService: RiderAuthService,
   ) {
     super({

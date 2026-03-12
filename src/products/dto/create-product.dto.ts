@@ -2,7 +2,6 @@ import {
   IsArray,
   IsInt,
   IsNotEmpty,
-  isNumber,
   IsNumber,
   IsString,
   Max,
@@ -15,7 +14,7 @@ export class CreateProductDto {
   name: string;
 
   @IsArray()
-  @IsString()
+  @IsString({ each: true })
   category: string[];
 
   @IsNumber()

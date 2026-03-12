@@ -1,4 +1,4 @@
-import { CreateMartOwnerDto } from './dto/mart-owner.dto';
+import { OwnerSignupDto } from './dto/mart-owner.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { StoreOwner } from './store-owner.entity';
@@ -10,7 +10,7 @@ export class MartOwnerService {
   constructor(
     @InjectRepository(StoreOwner) private martOwnerRepo: Repository<StoreOwner>,
   ) {}
-  async createProfile(createMartOwnerDto: CreateMartOwnerDto) {
+  async createProfile(createMartOwnerDto: OwnerSignupDto) {
     const martOwner = new StoreOwner();
     martOwner.firstName = createMartOwnerDto.firstName;
     martOwner.lastName = createMartOwnerDto.lastName;
